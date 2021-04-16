@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "accentLeafletTest"
+    }
+  },
+  "defaultProject": "accentLeafletTest",
+  "cli": {
+    "analytics": "b858a824-2b9d-4997-b3c1-fb650ac7941f"
+  }
 }
