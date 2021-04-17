@@ -3,6 +3,22 @@ import * as L from 'leaflet';
 import { ArchiveService } from './services/archive.service';
 
 
+
+// const iconRetinaUrl = 'assets/marker-icon-2x.png';
+// const iconUrl = 'assets/marker-icon.png';
+// const shadowUrl = 'assets/marker-shadow.png';
+// const iconDefault = L.icon({
+//   iconRetinaUrl,
+//   iconUrl,
+//   shadowUrl,
+//   iconSize: [25, 41],
+//   iconAnchor: [12, 41],
+//   popupAnchor: [1, -34],
+//   tooltipAnchor: [16, -28],
+//   shadowSize: [41, 41]
+// });
+// L.Marker.prototype.options.icon = iconDefault;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -21,8 +37,8 @@ export class AppComponent implements AfterViewInit {
 
   private initMap(): void {
     this.map = L.map('map', {
-      center: [ 39.8282, -98.5795 ],
-      zoom: 3
+      center: [ 35.62224166666667, 10.737660000000002 ],
+      zoom: 10
     });
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -36,7 +52,14 @@ export class AppComponent implements AfterViewInit {
 
   private makeMarkers(){
     this.archiveService.getData().subscribe(
-      resp=>{console.log(resp)},
+      resp=>{console.log(resp.length);
+        for(let i=0;i<400;i++ ){
+          const lon =resp[i].longitude;
+          const lat =resp[i].latitude;
+          const marker=L.marker([lat,lon]);
+          marker.addTo(this.map)
+        }
+      },
       err=>{console.log(err)}
     );
   }
