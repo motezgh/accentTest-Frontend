@@ -53,7 +53,7 @@ export class AppComponent implements AfterViewInit {
   private makeMarkers(){
     this.archiveService.getData().subscribe(
       resp=>{console.log(resp.length);
-        for(let i=0;i<400;i++ ){
+        for(let i=0;i<resp.length;i++ ){
           const lon =resp[i].longitude;
           const lat =resp[i].latitude;
           const marker=L.marker([lat,lon]);
