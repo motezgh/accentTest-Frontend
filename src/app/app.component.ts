@@ -27,6 +27,8 @@ import { ArchiveService } from './services/archive.service';
 export class AppComponent implements AfterViewInit {
 
   private map;
+  private polyPoints =[]
+  private dataLength;
 
   constructor(private archiveService: ArchiveService) { }
 
@@ -52,13 +54,28 @@ export class AppComponent implements AfterViewInit {
 
   private makeMarkers(){
     this.archiveService.getData().subscribe(
-      resp=>{console.log(resp.length);
-        for(let i=0;i<resp.length;i++ ){
+      resp=>{console.log(resp[0].latitude);
+        this.dataLength=resp.length;
+        for(let i=0;i<this.dataLength;i++ ){
           const lon =resp[i].longitude;
           const lat =resp[i].latitude;
-          const marker=L.marker([lat,lon]);
-          marker.addTo(this.map)
+          // const marker=L.marker([lat,lon]);
+          // marker.addTo(this.map);
+
+          this.polyPoints.push([lat,lon]);
+          
         }
+        
+        const firstMarker=L.marker([resp[0].latitude,resp[0].longitude]);
+        firstMarker.addTo(this.map);
+        const lastMarker=L.marker([resp[this.dataLength-1].latitude,resp[this.dataLength-1].longitude]);
+        lastMarker.addTo(this.map);
+
+        
+        const line=L.polyline(this.polyPoints, {
+          color: "red"
+        });
+        line.addTo(this.map);
       },
       err=>{console.log(err)}
     );
