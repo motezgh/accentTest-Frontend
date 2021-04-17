@@ -13,7 +13,7 @@ export class ArchiveService {
   constructor(private http:HttpClient) { }
 
   getData():Observable<Arch1004901[]>{
-    return this.http.get<getResponseArchive>(host+'/archive?size=400&sort=date,asc')
+    return this.http.get<getResponseArchive>(host+'/archive?size=400&sort=date,desc')
     .pipe(map(response=>response._embedded.arch_1004901s))
   }
 

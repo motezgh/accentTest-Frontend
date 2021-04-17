@@ -2,6 +2,7 @@ import { AfterViewInit, Component } from '@angular/core';
 import * as L from 'leaflet';
 import { ArchiveService } from './services/archive.service';
 
+import "leaflet.animatedmarker/src/AnimatedMarker";
 
 
 // const iconRetinaUrl = 'assets/marker-icon-2x.png';
@@ -76,6 +77,18 @@ export class AppComponent implements AfterViewInit {
           color: "red"
         });
         line.addTo(this.map);
+
+        const animatedMarker=L.animatedMarker(line.getLatLngs(),
+        {
+          distance: 100,  // meters
+          interval: 500, // milliseconds
+        });
+        animatedMarker.addTo(this.map)
+
+        const group = new L.featureGroup([animatedMarker]);
+
+        this.map.fitBounds(group.getBounds());
+
       },
       err=>{console.log(err)}
     );
