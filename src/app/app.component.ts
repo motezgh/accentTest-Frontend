@@ -1,5 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import * as L from 'leaflet';
+import { ArchiveService } from './services/archive.service';
 
 
 @Component({
@@ -11,10 +12,11 @@ export class AppComponent implements AfterViewInit {
 
   private map;
 
-  constructor() { }
+  constructor(private archiveService: ArchiveService) { }
 
   ngAfterViewInit(): void {
     this.initMap();
+    this.makeMarkers();
   }
 
   private initMap(): void {
@@ -30,6 +32,13 @@ export class AppComponent implements AfterViewInit {
     });
 
     tiles.addTo(this.map);
+  }
+
+  private makeMarkers(){
+    this.archiveService.getData().subscribe(
+      resp=>{console.log(resp)},
+      err=>{console.log(err)}
+    );
   }
 
   }

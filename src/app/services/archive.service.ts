@@ -14,13 +14,13 @@ export class ArchiveService {
 
   getData():Observable<Arch1004901[]>{
     return this.http.get<getResponseArchive>(host+'/archive')
-    .pipe(map(response=>response._embedded.arch1004901s))
+    .pipe(map(response=>response._embedded.arch_1004901s))
   }
 
 }
 
 interface getResponseArchive{
   _embedded:{
-    arch1004901s:Arch1004901[];
+    arch_1004901s:Arch1004901[];
   }
 }
