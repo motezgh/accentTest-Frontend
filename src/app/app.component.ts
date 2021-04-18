@@ -92,7 +92,7 @@ export class AppComponent implements AfterViewInit {
         const animatedMarker=L.animatedMarker(line.getLatLngs(),
         {
           distance: 100,  // meters
-          interval: 500, // milliseconds
+          interval: 100, // milliseconds
         });
         animatedMarker.addTo(this.map)
 
