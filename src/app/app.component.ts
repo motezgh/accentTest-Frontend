@@ -5,20 +5,20 @@ import { ArchiveService } from './services/archive.service';
 import "leaflet.animatedmarker/src/AnimatedMarker";
 
 
-// const iconRetinaUrl = 'assets/marker-icon-2x.png';
-// const iconUrl = 'assets/marker-icon.png';
-// const shadowUrl = 'assets/marker-shadow.png';
-// const iconDefault = L.icon({
-//   iconRetinaUrl,
-//   iconUrl,
-//   shadowUrl,
-//   iconSize: [25, 41],
-//   iconAnchor: [12, 41],
-//   popupAnchor: [1, -34],
-//   tooltipAnchor: [16, -28],
-//   shadowSize: [41, 41]
-// });
-// L.Marker.prototype.options.icon = iconDefault;
+const iconRetinaUrl = 'assets/marker-icon-2x.png';
+const iconUrl = 'assets/marker-icon.png';
+const shadowUrl = 'assets/marker-shadow.png';
+const iconDefault = L.icon({
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41]
+});
+L.Marker.prototype.options.icon = iconDefault;
 
 @Component({
   selector: 'app-root',
@@ -80,7 +80,7 @@ export class AppComponent implements AfterViewInit {
         `<div><b>Speed: </b> ${ resp[0].speed } KM/H</div>` );
         firstMarker.addTo(this.map);
         const lastMarker=L.marker([resp[this.dataLength-1].latitude,resp[this.dataLength-1].longitude]).bindPopup(`<div><b>Date: </b> ${ resp[this.dataLength-1].date } </div>` +
-        `<div><b>Speed: </b> ${ resp[this.dataLength-1].speed } KM/H</div>` );
+        `<div><b>Speed: </b> ${ resp[this.dataLength-1].speed } KM/H</div>` ).openPopup();
         lastMarker.addTo(this.map);
 
         
