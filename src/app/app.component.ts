@@ -44,13 +44,22 @@ export class AppComponent implements AfterViewInit {
       zoom: 10
     });
 
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      minZoom: 3,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    });
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibW90ZXpnaCIsImEiOiJja25uNHV3OXAwdmx3MnZwcm9sc2w4bWJ1In0.5-wCrCGRN92kQADrPrFuEw', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'your.mapbox.access.token'
+}).addTo(this.map);
 
-    tiles.addTo(this.map);
+    // const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //   maxZoom: 18,
+    //   minZoom: 3,
+    //   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    // });
+
+    // tiles.addTo(this.map);
   }
 
   private makeMarkers(){
@@ -67,11 +76,11 @@ export class AppComponent implements AfterViewInit {
           
         }
         
-        const firstMarker=L.marker([resp[0].latitude,resp[0].longitude]).bindPopup(`<div>Date: ${ resp[0].date } </div>` +
-        `<div>Speed: ${ resp[0].speed }</div>` );
+        const firstMarker=L.marker([resp[0].latitude,resp[0].longitude]).bindPopup(`<div><b>Date: </b> ${ resp[0].date } </div>` +
+        `<div><b>Speed: </b> ${ resp[0].speed } KM/H</div>` );
         firstMarker.addTo(this.map);
-        const lastMarker=L.marker([resp[this.dataLength-1].latitude,resp[this.dataLength-1].longitude]).bindPopup(`<div>Date: ${ resp[this.dataLength-1].date } </div>` +
-        `<div>Speed: ${ resp[this.dataLength-1].speed }</div>` );
+        const lastMarker=L.marker([resp[this.dataLength-1].latitude,resp[this.dataLength-1].longitude]).bindPopup(`<div><b>Date: </b> ${ resp[this.dataLength-1].date } </div>` +
+        `<div><b>Speed: </b> ${ resp[this.dataLength-1].speed } KM/H</div>` );
         lastMarker.addTo(this.map);
 
         
