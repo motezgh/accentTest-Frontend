@@ -93,7 +93,9 @@ export class AppComponent implements AfterViewInit {
         {
           distance: 100,  // meters
           interval: 100, // milliseconds
-        });
+        })
+        .bindPopup(`<div><b>Start Date: </b> ${ resp[0].date } </div>` +
+        `<div><b>End Date: </b> ${ resp[this.dataLength-1].date } </div>` );
         animatedMarker.addTo(this.map)
 
         const group = new L.featureGroup([animatedMarker]);
