@@ -55,7 +55,7 @@ export class AppComponent implements AfterViewInit {
 
   private makeMarkers(){
     this.archiveService.getData().subscribe(
-      resp=>{console.log(resp[0].latitude);
+      resp=>{console.log(resp[0]);
         this.dataLength=resp.length;
         for(let i=0;i<this.dataLength;i++ ){
           const lon =resp[i].longitude;
@@ -67,9 +67,11 @@ export class AppComponent implements AfterViewInit {
           
         }
         
-        const firstMarker=L.marker([resp[0].latitude,resp[0].longitude]);
+        const firstMarker=L.marker([resp[0].latitude,resp[0].longitude]).bindPopup(`<div>Date: ${ resp[0].date } </div>` +
+        `<div>Speed: ${ resp[0].speed }</div>` );
         firstMarker.addTo(this.map);
-        const lastMarker=L.marker([resp[this.dataLength-1].latitude,resp[this.dataLength-1].longitude]);
+        const lastMarker=L.marker([resp[this.dataLength-1].latitude,resp[this.dataLength-1].longitude]).bindPopup(`<div>Date: ${ resp[this.dataLength-1].date } </div>` +
+        `<div>Speed: ${ resp[this.dataLength-1].speed }</div>` );
         lastMarker.addTo(this.map);
 
         
